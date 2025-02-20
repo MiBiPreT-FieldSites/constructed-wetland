@@ -1,0 +1,21 @@
+# YAML 1.2
+---
+cff-version: "1.2.0"
+title: "Title of my software"
+authors:
+  -
+    family-names: Zech
+    given-names: Alraune
+    orcid: "https://orcid.org/0000-0002-8783-6198"
+
+date-released: 2024-03-26
+doi: 10.5281/zenodo.1234
+version: "0.1.0"
+repository-code: "https://github.com/MiBiPreT-FieldSites/my-project"
+keywords:
+  - bioremediation
+  - contaminant data analysis
+  - contaminant transport modelling
+  - bio-geo-chemical modelling
+message: "If you use this software, please cite it using these metadata."
+license: Apache-2.0
