@@ -6,9 +6,9 @@ sys.path.append(path)
 import pandas as pd
 
 #Load the Excel file
-excel_file = './CW_BTEXN_T0_backup.xlsx' 
+excel_file = './cw_T0_BTEXN_.xlsx' 
 df = pd.read_excel(excel_file)
 
 # Save the file as CSV
 
-df.to_csv('CW_BTEXN_T0.csv', index=False) 
+df.to_csv('cw_BTEXN_T0.csv', index=False) 
