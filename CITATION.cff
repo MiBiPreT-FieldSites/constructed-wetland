@@ -1,21 +1,32 @@
 # YAML 1.2
 ---
-cff-version: "1.2.0"
-title: "Title of my software"
-authors:
-  -
-    family-names: Zech
-    given-names: Alraune
-    orcid: "https://orcid.org/0000-0002-8783-6198"
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
 
-date-released: 2024-03-26
-doi: 10.5281/zenodo.1234
-version: "0.1.0"
-repository-code: "https://github.com/MiBiPreT-FieldSites/my-project"
+cff-version: 1.2.0
+title: Bioremediation Prediction Tool
+message: >-
+  If you use this software, please cite it using these
+  metadata.
+type: software
+authors:
+  - given-names: Sona
+    family-names: Aseyednezhad
+    email: s.aseyednezhad@uu.nl
+    orcid: 'https://orcid.org/0000-0001-7324-2009'
+  - given-names: Alraune
+    family-names: Zech
+    name-particle: Alraune
+    email: a.zech@uu.nl
+    orcid: 'https://orcid.org/0000-0002-8783-6198'
+repository-code: 'https://github.com/MiBiPreT-FieldSites/constructed-wetland'
 keywords:
   - bioremediation
-  - contaminant data analysis
-  - contaminant transport modelling
+  - chemical data analysis
+  - contaminant flow and transport modelling
   - bio-geo-chemical modelling
-message: "If you use this software, please cite it using these metadata."
 license: Apache-2.0
+version: 0.1.0
+date-released: '2024-03-26'
+doi: 10.5281/zenodo.1234
+
