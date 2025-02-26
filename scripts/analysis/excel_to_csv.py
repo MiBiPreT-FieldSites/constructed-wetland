@@ -6,12 +6,12 @@ sys.path.append(path)
 import pandas as pd
 
 #Load the Excel file
-excel_file = './cw_T1_BTEXN.xlsx' 
+excel_file = '../../data/cleaned/na_screening/cw_T2_BTEXN.xlsx' 
 df = pd.read_excel(excel_file)
 
 # Save the file as CSV
 
-df.to_csv('cw_T1_BTEXN.csv', index=False) 
+df.to_csv('../../data/cleaned/na_screening/cw_T2_BTEXN.csv', index=False) 
 
 #import pandas as pd
 

@@ -2,15 +2,10 @@
 import mibipret.analysis.sample.screening_NA as na
 from mibipret.data.check_data import standardize
 from mibipret.data.load_data import load_csv
-from mibipret.visualize.activity import activity
 from IPython.display import display
 
-#verbose = True
-#contaminant_group = "BTEXN"
-
-file_path = "./cw_T1_BTEXN.csv"
+file_path = "../../data/cleaned/na_screening/cw_T2_BTEXN.csv"
 data_raw,units = load_csv(file_path, verbose = True)
-
 
 data,units = standardize(data_raw,reduce = True, verbose = True)
 
@@ -26,7 +21,5 @@ tot_cont = na.total_contaminant_concentration(data, verbose = True, contaminant_
 
 na_interventation = na.thresholds_for_intervention(data, verbose=True, contaminant_group="BTEX")
 
-display(na_interventation)
-#print(na_interventation)
-
-#na.screening_NA(data, inplace= True, verbose = True)
+data_na = na.screening_NA(data)
+display(data_na)
