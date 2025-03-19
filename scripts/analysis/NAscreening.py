@@ -4,7 +4,7 @@ from mibipret.data.check_data import standardize
 from mibipret.data.load_data import load_csv
 from IPython.display import display
 
-file_path = "../../data/cleaned/na_screening/cw_T2_BTEXN.csv"
+file_path = "../../data/cleaned/cw_T3_BTEXN.csv"
 data_raw,units = load_csv(file_path, verbose = True)
 
 data,units = standardize(data_raw,reduce = True, verbose = True)
