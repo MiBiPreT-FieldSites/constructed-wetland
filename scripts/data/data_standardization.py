@@ -31,11 +31,100 @@ def cleanup_compound(file_path):
     # Update the dataFrame’s columns to the new names stored in monster_names
     dataframe.columns = monster_names
 
+    # Define a dictionary mapping Dutch to English.
+    translation_dict = {
+        "Analysis": "Analysis",
+        "Projectcode": "Project code",
+        "Projectnaam": "Project name",
+        "Monsteromschrijving": "Sample description",
+        "Rapport status":	"Report status",
+        "Validatie status":	"Validation status",
+        "Rapport Datum":	"Report Date",
+        "Start Datum":	"Start Date",
+        "DOC":	"DOC",
+        "TOC":	"TOC",
+        "METALEN":	"METALS",
+        "Ijzer (2+)":	"Iron II",
+        "Mangaan (II)":	"MN II",
+        "ANORGANISCHE VERBINDINGEN":	"INORGANIC COMPOUNDS",
+        "cyanide (totaal)":	"cyanid",
+        "fosfor (totaal)":	"phosphor",
+        "VLUCHTIGE AROMATEN":	"VOLATILE AROMATICS",
+        "benzeen":	"benzene",
+        "tolueen":	"toluene",
+        "ethylbenzeen":	"ethylbenzene",
+        "o-xyleen":	"o-xylene",
+        "p- en m-xyleen": "(m+p)-xylene",
+        "xylenen (0.7 factor)":	"sum xylenes (factor 0.7)",
+        "totaal BTEX (0.7 factor)":	"total BTEX (factor 0.7)",
+        "naftaleen":	"naphthalene",
+        "FENOLEN":	"PHENOLS",
+        "fenol":	"phenol",
+        "m-cresol":	"m-cresol",
+        "o-cresol":	"o-cresol",
+        "p-cresol":	"p-cresol",
+        "som cresolen":	"som cresols",
+        "2-ethylfenol":	"2-ethylphenol",
+        "3-ethylfenol":	"3-ethylphenol",
+        "2,4-dimethylfenol":	"2,4-dimethylphenol",
+        "2,5-dimethylfenol":	"2,5-dimethylphenol",
+        "3,5+2,3-dimethylfenol+4-ethylfenol":	"3,5+2,3-dimethylphenol+4-ethylphenol",
+        "2,6-dimethylfenol":	"2,6-dimethylphenol",
+        "3,4-dimethylfenol":	"3,4-dimethylphenol",
+        "som C2-alkylfenolen":	"som C2-alkylphenolen",
+        "2,3,5-trimethylfenol":	"2,3,5-trimethylphenol",
+        "3,4,5-trimethylfenol":	"3,4,5-trimethylphenol",
+        "2-isopropylfenol":	"2-isopropylphenol",
+        "som C3-alkylfenolen":	"som C3-alkylphenolen",
+        "thymol":	"thymol",
+        "p-(tert)butylfenol":	"p-(tert)butylphenol",
+        "som C4-alkylfenolen":	"som C4-alkylphenolen",
+        "POLYCYCLISCHE AROMATISCHE KOOLWATERSTOFFEN":	"POLYCYCLIC AROMATIC HYDROCARBONS",
+        "naftaleen":	"naphthalene",
+        "acenaftyleen":	"acenaphthylene",
+        "acenafteen":	"acenaphtene",
+        "fluoreen":	"fluorene",
+        "fenantreen":	"phenanthrene",
+        "antraceen":	"anthracene",
+        "fluoranteen":	"fluoranthene",
+        "pyreen":	"pyrene",
+        "benzo(a)antracee":	"benzo(a)anthracene",
+        "chryseen":	"chrysene",
+        "benzo(b)fluoranteen":	"benzo(b)fluoranthene",
+        "benzo(k)fluoranteen":	"benzo(k)fluoranthene",
+        "benzo(a)pyreen":	"benzo(a)pyrene",
+        "dibenz(a,h)antraceen":	"dibenz(a,h)anthracene",
+        "benzo(ghi)peryleen":	"benzo(g,h,i)perylene",
+        "indeno(1,2,3-cd)pyreen":	"indeno(1,2,3-cd)pyrene",
+        "pak-totaal (16 van EPA)":	"sum PAH (16 EPA)",
+        "pak-totaal (10 van VROM) (0.7 factor)":	"sum PAH (VROM) (factor 0.7)",
+        "MINERALE OLIE":	"MINERAL OIL",
+        "fractie C10-C12":	"fraction C10-C12",
+        "fractie C12-C22":	"fraction C12-C22",
+        "fractie C22-C30":	"fraction C22-C30",
+        "fractie C30-C40":	"fraction C30-C40",
+        "totaal olie C10 - C40":	"total oil C10 - C40",
+        "DIVERSE NATCHEMISCHE BEPALINGEN":	"VARIOUS NAT CHEMICAL DETERMINATIONS",
+        "chloride":	"chloride",
+        "nitriet":	"nitrite",
+        "nitriet-N":	"nitrite - N",
+        "nitraat":	"nitrate",
+        "nitraat-N":	"nitrate - N",
+        "sulfaat":	"sulphates",
+        "Zuurstof": "Oxygen"
+    }
+
+    # Translate the index using the dictionary.
+    dataframe.index = dataframe.index.map(lambda x: translation_dict.get(x, x))
+
+    print("\nDataFrame after translating the index:")
+    print(dataframe)
+
     # Turn the index into a regular column with the header "Well name"
     dataframe_reset = dataframe.reset_index()
    
     # Mentioned rows and rows without any data are not needed and thus removed
-    drop_rows = ["Analysis", "Projectcode", "Projectnaam", "Rapport status", "Validatie status", "Rapport Datum", "Start Datum"]
+    drop_rows = ["Analysis", "Project code", "Project name", "Report status", "Validation status", "Report Date", "Start Date"]
     dataframe_reset_filtered = dataframe_reset[~dataframe_reset["Well name"].isin(drop_rows)]
     dataframe_reset_filtered = dataframe_reset_filtered.dropna(axis = "index", how = "all", subset=dataframe_reset_filtered.columns[1:])
 
@@ -61,6 +150,7 @@ def cleanup_compound(file_path):
 
     dataframe_reset_sorted = pd.concat([dataframe_reset_sorted, oxygen_data])
 
+    dataframe_reset_sorted["Well name"] = dataframe_reset_sorted["Well name"].replace(translation_dict)
  # Compounds under the detection limit have been entered as <*detection limit*.
     # These values are set to 0. 
     dataframe_reset_sorted = dataframe_reset_sorted.map(lambda x: 0 if isinstance(x, str) and x.startswith('<') else x)
@@ -70,7 +160,7 @@ def cleanup_compound(file_path):
 
     # Create a boolean mask based on the 'Header' column.
     # This mask is True for rows where the Header is NOT "Zuurstof" or "Monsteromschrijving"
-    mask = ~dataframe_reset_sorted["Well name"].isin(["Zuurstof", "Monsteromschrijving"])
+    mask = ~dataframe_reset_sorted["Well name"].isin(["Oxygen", "Sample description"])
 
     for col in dataframe_reset_sorted.columns:
         if col not in excluded_cols:
@@ -80,10 +170,10 @@ def cleanup_compound(file_path):
     dataframe_reset_sorted = dataframe_reset_sorted.fillna(0.0)
     
     # After cleaning, update the "unit" column for the row where "Well name" is "Monsteromschrijving"
-    dataframe_reset_sorted.loc[dataframe_reset_sorted["Well name"] == "Monsteromschrijving", "unit"] = "-"
+    dataframe_reset_sorted.loc[dataframe_reset_sorted["Well name"] == "Sample description", "unit"] = "-"
     
     dataframe_transposed = dataframe_reset_sorted.transpose()
-
+    
     return(dataframe_transposed)
 
 if __name__ == "__main__":
