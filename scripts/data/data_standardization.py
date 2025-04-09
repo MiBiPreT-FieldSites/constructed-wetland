@@ -159,7 +159,7 @@ def cleanup_compound(file_path):
     excluded_cols = ["Well name", "unit"]
 
     # Create a boolean mask based on the 'Header' column.
-    # This mask is True for rows where the Header is NOT "Zuurstof" or "Monsteromschrijving"
+    # This mask is True for rows where the Header is NOT "Oxygen" or "Sample description"
     mask = ~dataframe_reset_sorted["Well name"].isin(["Oxygen", "Sample description"])
 
     for col in dataframe_reset_sorted.columns:
@@ -169,7 +169,7 @@ def cleanup_compound(file_path):
             dataframe_reset_sorted.loc[mask, col] = pd.to_numeric(dataframe_reset_sorted.loc[mask, col], errors='coerce')
     dataframe_reset_sorted = dataframe_reset_sorted.fillna(0.0)
     
-    # After cleaning, update the "unit" column for the row where "Well name" is "Monsteromschrijving"
+    # After cleaning, update the "unit" column for the row where "Well name" is "Sample description"
     dataframe_reset_sorted.loc[dataframe_reset_sorted["Well name"] == "Sample description", "unit"] = "-"
     
     dataframe_transposed = dataframe_reset_sorted.transpose()
