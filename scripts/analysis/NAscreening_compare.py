@@ -5,7 +5,7 @@ from IPython.display import display
 import pandas as pd
 
 # Define one or more CSV file paths for the same site at different times.
-# You can modify this list with your actual file paths.
+
 file_paths = [
     "../../data/cleaned/na_screening/cw_T0_BTEXN.csv",
     "../../data/cleaned/na_screening/cw_T1_BTEXN.csv",
@@ -24,10 +24,10 @@ for file in file_paths:
     # Load raw data and units from the CSV file.
     data_raw, units = load_csv(file, verbose=True)
     
-    # Standardize the data (this will clean the data and reduce it to known quantities).
+    # Standardize the data (clean the data and reduce it to known quantities).
     data, units = standardize(data_raw, reduce=True, verbose=True)
     
-    # (Optional) Calculate additional outputs for debugging or further analysis.
+    # Calculate additional outputs for debugging or further analysis.
     tot_redct = na.reductors(data, verbose=True, ea_group="ONS")
     tot_oxi = na.oxidators(data, verbose=True, contaminant_group="BTEX")
     e_bal = na.electron_balance(data, verbose=True)
@@ -38,7 +38,7 @@ for file in file_paths:
     # Get the final NA screening table for this dataset.
     data_na = na.screening_NA(data)
     
-    # Use the file name (or a modified version) as a key for the results dictionary.
+    # Use the file name as a key for the results dictionary.
     results[file] = data_na
 
 # If there is only one file, display its output directly.
@@ -46,6 +46,6 @@ if len(results) == 1:
     display(list(results.values())[0])
 else:
     # Combine the outputs side by side for comparison.
-    # This will create a DataFrame with a MultiIndex for columns where the first level is the file path.
+    # Create a DataFrame with a MultiIndex for columns where the first level is the file path.
     comparison_table = pd.concat(results, axis=1)
     display(comparison_table)
