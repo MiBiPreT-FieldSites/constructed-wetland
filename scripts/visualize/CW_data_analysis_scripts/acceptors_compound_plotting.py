@@ -22,7 +22,7 @@ rename = ["Manganese (II)", "Iron (II)", "Sulfate"]
 
 # Locations to plot, using the names of location_dictionary.
 colors = ["#89003d", "#f0ab70", "#ffd220", "#66a697", "#004D8A"]
-plots = ["CW1_deep", "CW2_deep", "CW3_deep"]
+plots = ["CW1_shallow", "CW2_shallow", "CW3_shallow"]
 titles = ["CW1", "CW2", "CW3"]
 # Relative file path to the excel file with the data
 time_points = [0,1,2,3]
@@ -33,7 +33,7 @@ ylimit_list = [(-0.5, 30), (-1, 100), (-0.1, 5)]
 
 df_list = []
 for time in time_points:
-    file_path = f"../CW_field_measurements/240120_Resultaten_ronde_T={time}.xlsx"
+    file_path = f"../../../data/raw/CW_field_meassurements/Raw_data_lab/240120_Resultaten_ronde_T{time}.xlsx"
     df_list.append(tools.cleanup_compound(file_path))
 
 #%% 
@@ -120,7 +120,7 @@ lines_labels = [ax.get_legend_handles_labels()]
 lines, labels = [sum(lol, []) for lol in zip(*lines_labels)]
 fig.legend(lines, labels, 
            loc = "lower center",
-           bbox_to_anchor = (0.5,-0.05),
+           bbox_to_anchor = (0.5,-0.001),
            fontsize = 20,
            ncol = 5,
            columnspacing = 0.75,
