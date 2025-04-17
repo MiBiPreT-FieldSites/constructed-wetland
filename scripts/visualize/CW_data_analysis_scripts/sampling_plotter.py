@@ -13,31 +13,32 @@ import matplotlib.pyplot as plt
 
 #%%
 # Relative file path to the excel file with the data
-time_point = "3"
-file_path = f"../CW_field_measurements/240120_Resultaten_ronde_T={time_point}.xlsx"
+time_point = "2"
+file_path = f"../../../data/raw/CW_field_meassurements/Raw_data_lab/240120_Resultaten_ronde_T{time_point}.xlsx"
 df = tools.cleanup_compound(file_path)
 
 #%%
 # Contaminants to be plotted
 #plot_compounds = ["chloride"]
-#plot_compounds = ["benzeen", "tolueen", "ethylbenzeen", "xylenen (0.7 factor)", "totaal BTEX (0.7 factor)"]
-plot_compounds = ["Ijzer (2+)"]
+plot_compounds = ["benzeen", "tolueen", "ethylbenzeen", "xylenen (0.7 factor)", "totaal BTEX (0.7 factor)"]
+#plot_compounds = ["Ijzer (2+)"]
 #plot_compounds = ["Zuurstof"]
 #plot_compounds = ["Ijzer (2+)","Mangaan (II)", "sulfaat"]
 # Rename the contaminants to be plotted (optional), put them in the same order as above.
-#rename_compounds = ["benzene", "toluene", "ethylbenzene", "xylenes", "total BTEX"]
+rename_compounds = ["benzene", "toluene", "ethylbenzene", "xylenes", "total BTEX"]
 #rename_compounds = ["iron (II)", "manganese (II)", "sulfate"]
-rename_compounds = ["oxygen"]
+#rename_compounds = ["oxygen"]
 # Locations to plot, using the names of location_dictionary.
 colors = ["#5c0000", "#89003d", "#f0ab70", "#ffd220", "#66a697", "#004D8A"]
-plots = ["CW1_ondiep", "CW2_ondiep", "CW3_ondiep"]
+plots = ["CW1_shallow", "CW2_shallow", "CW3_shallow"]
 subplots = ["a", "b", "c"]
 
 for i, location in enumerate(plots):
     plot_location = loc[location]
     ax = tools.plot_compound(df, plot_location, plot_compounds, 
                              rename = rename_compounds,
-                             normalize = False, 
+                             normalize = True, 
+                             compensate_dilution = True,
                              plot_type="line",
                              ylimit = False,
                              figsize = (6,5),
@@ -45,8 +46,8 @@ for i, location in enumerate(plots):
                              linestyle='--',
                              marker='o',
                              )
-    #plt.title(f"Concentration in {location}, t = {time_point}")
-    plt.title(subplots[i], loc="left")
+    plt.title(f"Concentration in {location}, t = {time_point}")
+    #plt.title(subplots[i], loc="left")
 
 # Display all plots
 plt.show()

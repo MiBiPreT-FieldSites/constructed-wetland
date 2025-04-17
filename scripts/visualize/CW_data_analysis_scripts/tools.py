@@ -243,8 +243,8 @@ def plot_compound(dataframe, locations, compounds, rename = None, normalize = Fa
         else:
             plot_frame = plot_frame.div(plot_frame.loc["chloride"])
     
-    if not normalize:
-        plot_frame = plot_frame.div(1000)
+    #if not normalize:
+        #plot_frame = plot_frame.div(1000)
     
     # Select requested locations and compounds
     plot_frame = plot_frame[locations].loc[compounds].T
@@ -260,7 +260,7 @@ def plot_compound(dataframe, locations, compounds, rename = None, normalize = Fa
     # Generate list of each unique unit in the plot.
     units = list(set(plot_units.tolist()))
 
-    plt.rcParams["figure.dpi"] = 600
+    plt.rcParams["figure.dpi"] = 300
 
     # If the compounds to be plotted have two different units, they will be plotted
     # on seperate y-axis.
@@ -268,7 +268,7 @@ def plot_compound(dataframe, locations, compounds, rename = None, normalize = Fa
         unit = units[0]
         ax = plot_frame.plot.line(**kwargs)
         if normalize:
-            ax.set_ylabel("C/C0")
+            ax.set_ylabel(f"Relative concentration, [C/C0]")
         else:
             ax.set_ylabel(f"Concentration [{unit}]")
 

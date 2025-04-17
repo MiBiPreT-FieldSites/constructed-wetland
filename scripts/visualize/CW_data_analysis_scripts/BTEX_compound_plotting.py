@@ -26,7 +26,7 @@ titles = ["CW1", "CW2", "CW3"]
 # Relative file path to the excel file with the data
 time_points = [0,1,2,3]
 
-normalize = False
+normalize = True
 compensate_dilution = True
 ylimit = (-0.1, 3)
 
@@ -101,8 +101,8 @@ fig.legend(lines, labels,
            frameon = False)
 
 fig.supxlabel(r"Measurement locations", fontsize = 15)
-#fig.supylabel(r"Relative concentration [$C/C_{0}$]", fontsize = 35)
-fig.supylabel(r"Concentration [$g/m^3$]", fontsize = 25)    
+fig.supylabel(r"Relative concentration [$C/C_{0}$]", fontsize = 35)
+#fig.supylabel(r"Concentration [$g/m^3$]", fontsize = 25)    
 
 plt.show()
 
