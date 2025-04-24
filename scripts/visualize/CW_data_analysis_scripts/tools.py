@@ -233,22 +233,81 @@ def plot_compound(dataframe, locations, compounds, rename = None, normalize = Fa
     plot_frame = dataframe.drop(columns = "unit", axis=0)
     
     # Influent is the same for each wetland, thus divide by it to normalize data.
-    if normalize:
-        plot_frame = plot_frame.div(plot_frame["INF"], axis = 0)
+    # if normalize:
+    #     plot_frame = plot_frame.div(plot_frame["INF"], axis = 0)
     
-    if compensate_dilution:
-        if not normalize:
-            comp_chlor = plot_frame.div(plot_frame["INF"], axis = 0)
-            plot_frame = plot_frame.div(comp_chlor.loc["chloride"])
-        else:
-            plot_frame = plot_frame.div(plot_frame.loc["chloride"])
+    # if compensate_dilution:
+    #     if not normalize:
+    #         comp_chlor = plot_frame.div(plot_frame["INF"], axis = 0)
+    #         plot_frame = plot_frame.div(comp_chlor.loc["chloride"])
+    #     else:
+    #         plot_frame = plot_frame.div(plot_frame.loc["chloride"])
     
     #if not normalize:
         #plot_frame = plot_frame.div(1000)
-    
+
+    if normalize:
+        norm_frame = plot_frame.copy()
+
+        for cmpd in plot_frame.index:
+            if cmpd != "Zuurstof":
+                try:
+                    # Get the scalar INF value for this compound
+                    inf_value = plot_frame.at[cmpd, "INF"]
+                                
+                    # Normalize the full row
+                    norm_frame.loc[cmpd] = plot_frame.loc[cmpd] / inf_value
+
+                except Exception as e:
+                    print(f"Skipping {cmpd} due to error: {e}")
+
+        plot_frame = norm_frame
+
+
+    # --- STEP 2: If chloride correction is requested ---
+    if compensate_dilution:
+                
+        # If normalize is False, we still need to normalize (except Zuurstof) to apply chloride correction
+        if not normalize:
+            for cmpd in plot_frame.index:
+                if cmpd != "Zuurstof":
+                    try:
+                        # Get the scalar INF value for this compound
+                        inf_value = plot_frame.at[cmpd, "INF"]
+                                    
+                        # Normalize the full row
+                        norm_frame.loc[cmpd] = plot_frame.loc[cmpd] / inf_value
+
+                    except Exception as e:
+                        print(f"Skipping {cmpd} due to error: {e}")
+
+            plot_frame = norm_frame
+
+    #Now apply chloride-based dilution correction to all compounds
+    chloride_correction = plot_frame.loc["chloride"]
+    plot_frame = plot_frame.div(chloride_correction)
+
+
     # Select requested locations and compounds
     plot_frame = plot_frame[locations].loc[compounds].T
-        
+
+    # turn columns into a simple list
+    cols = plot_frame.columns.tolist()
+
+    # find the position (0‐based) of the first "naphthalene"
+    try:
+        first_pos = cols.index("naftaleen")
+    except ValueError:
+        first_pos = None
+
+    # if we found at least two, drop only the first
+    if first_pos is not None:
+        # build a list of the column positions we want to *keep*
+        keep_positions = [i for i in range(len(cols)) if i != first_pos]
+        # re‐slice the DataFrame by position
+        plot_frame = plot_frame.iloc[:, keep_positions]
+
+
     # Keep information of units of plotted compounds
     plot_units = dataframe["unit"].loc[compounds]
     

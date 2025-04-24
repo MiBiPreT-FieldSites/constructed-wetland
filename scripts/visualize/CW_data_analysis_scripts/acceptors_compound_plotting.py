@@ -15,27 +15,29 @@ import matplotlib.pyplot as plt
 #%%
 # Contaminants to be plotted
 # Electron acceptors
-compounds = ["Zuurstof", "nitraat", "sulfaat"]
+#compounds = ["Zuurstof", "nitraat", "sulfaat"]
 # Reduced electron acceptors
-#compounds = ["sulfide (vrij)", "Mangaan (II)", "Ijzer (2+)"]
+compounds = ["sulfide (vrij)", "Mangaan (II)", "Ijzer (2+)"]
 
 # Rename the contaminants to be plotted (optional), put them in the same order as above.
 # Rename electron acceptors
-rename = ["Oxygen", "Nitrate", "Solphate"]
+#rename = ["Oxygen", "Nitrate", "Solphate"]
 
 # Rename reduced electron acceptors
-#rename = ["sulfide (free)", "Manganese (II)", "Iron (II)"]
+rename = ["sulfide (free)", "Manganese (II)", "Iron (II)"]
 
 # Locations to plot, using the names of location_dictionary.
 colors = ["#89003d", "#f0ab70", "#ffd220", "#66a697", "#004D8A"]
-plots = ["CW1_deep", "CW2_deep", "CW3_deep"]
+plots = ["CW1_shallow", "CW2_shallow", "CW3_shallow"]
 titles = ["CW1", "CW2", "CW3"]
 # Relative file path to the excel file with the data
 time_points = [0,1,2,3]
+dates = ["Aug 2024", "Oct 2024", "Dec 2024", "Feb 2025"]
 
 normalize = True
 compensate_dilution = True
-ylimit_list = [(-0.5, 10), (-0.5, 30), (-0.1, 5)]
+#ylimit_list = [(-0.5, 10), (-0.5, 30), (-0.1, 5)]
+ylimit_list = [(-0.5, 30), (-0.5, 30), (-0.1, 100)]
 
 df_list = []
 for time in time_points:
@@ -137,14 +139,15 @@ for i, compound in enumerate(compounds):
                 plot_frame.rename(rename_dict, axis = 1, inplace = True)
             
             plt.rcParams["figure.dpi"] = 200
-    
+
+            time_point_date = dates[time]
             ax.plot(plot_frame, 
                      linestyle='--',
                      marker='o',
                      markersize = 12,
                      lw = 5,
                      color = colors[time],
-                     label = f"t = {time}"
+                     label = f"t = {time_point_date}"
                      )
         
         

@@ -21,7 +21,7 @@ rename = ["Benzene", "Toluene", "Ethylbenzene", "Xylenes", "Total BTEX"]
 
 # Locations to plot, using the names of location_dictionary.
 colors = ["#5c0000", "#89003d", "#f0ab70", "#ffd220", "#66a697", "#004D8A"]
-plots = ["CW1_shallow", "CW2_shallow", "CW3_shallow"]
+plots = ["CW1_deep", "CW2_deep", "CW3_deep"]
 titles = ["CW1", "CW2", "CW3"]
 # Relative file path to the excel file with the data
 time_points = [0,1,2,3]
