@@ -13,14 +13,14 @@ class CompoundProperties:
         self.molecular_weight = molecular_weight
 
     def compute_Kd(self, site):
-        """Estimate Kd = foc × Koc, where log Koc = log Kow - 0.211"""
+        """Estimate Kd = foc * Koc, where log Koc = log Kow - 0.211"""
         Koc = 10 ** (self.log_Kow - 0.211)
         return site.foc * Koc
 
     def retardation(self, site):
         """
         Compute retardation factor:
-            R = 1 + (ρ_b / n) × Kd
+            R = 1 + (ρ_b / n) * Kd
         using site bulk density, porosity, and Kd
         """
         Kd = self.compute_Kd(site)

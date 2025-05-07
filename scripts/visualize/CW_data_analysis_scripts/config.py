@@ -2,10 +2,10 @@
 
 # Paths to cleaned Excel files and their sampling dates
 FILE_PATHS = [
-    ("../../data/cleaned/cw_T0_cleaned.xlsx", "2024-08-15"),
-    ("../../data/cleaned/cw_T1_cleaned.xlsx", "2024-10-15"),
-    ("../../data/cleaned/cw_T2_cleaned.xlsx", "2024-12-15"),
-    ("../../data/cleaned/cw_T3_cleaned.xlsx", "2025-02-15"),
+    ("../../../data/cleaned/cw_T0_cleaned.xlsx", "2024-08-14"),
+    ("../../../data/cleaned/cw_T1_cleaned.xlsx", "2024-10-23"),
+    ("../../../data/cleaned/cw_T2_cleaned.xlsx", "2025-01-7"),
+    ("../../../data/cleaned/cw_T3_cleaned.xlsx", "2025-02-18"),
 ]
 
 # Site parameters
@@ -14,6 +14,7 @@ POROSITY     = 0.4   # dimensionless
 FLOW_RATE    = 1   # m³/day
 BULK_VOLUME  = 4.0    # m³
 FOC          = 0.004   # fraction of organic carbon (e.g., 0.4%)
+PORE_VOLUME  = 20 # m³
 
 # Compound definitions: log_Kow, decay_rate (1/day), molecular_weight (g/mol)
 COMPOUND_INFO = {

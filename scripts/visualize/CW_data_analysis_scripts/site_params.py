@@ -1,6 +1,6 @@
 class SiteParameters:
     """All the media and flow parameters for a wetland cell, including foc."""
-    def __init__(self, bulk_density, porosity, flow_rate, bulk_volume, foc):
+    def __init__(self, bulk_density, porosity, flow_rate, bulk_volume, foc, pore_volume):
         """
         Parameters:
         - bulk_density: kg/L
@@ -8,14 +8,17 @@ class SiteParameters:
         - flow_rate: m³/day
         - bulk_volume: m³
         - foc: fraction of organic carbon in the medium
+        - pore_volume
         """
         self.bulk_density = bulk_density
         self.porosity     = porosity
         self.flow_rate    = flow_rate
         self.bulk_volume  = bulk_volume
         self.foc          = foc
+        self._pore_volume  = pore_volume
+
 
     @property
     def pore_volume(self):
-        """Compute pore volume Vp = n × Vbulk (m³)."""
-        return self.porosity * self.bulk_volume
+        """Return manually provided pore volume."""
+        return self._pore_volume
