@@ -24,28 +24,28 @@ df = tools.cleanup_compound(file_path)
 #%%
 # Contaminants to be plotted
 #plot_compounds = ["chloride"]
-#plot_compounds = ["benzeen", "tolueen", "ethylbenzeen", "xylenen (0.7 factor)", "totaal BTEX (0.7 factor)"]
+plot_compounds = ["benzeen", "tolueen", "ethylbenzeen", "xylenen (0.7 factor)", "totaal BTEX (0.7 factor)"]
 #plot_compounds = ["Ijzer (2+)"]
 #plot_compounds = ["Zuurstof"]
-plot_compounds = ["Zuurstof", "nitraat", "sulfaat"]
+#plot_compounds = ["Zuurstof", "nitraat", "sulfaat"]
 #plot_compounds = ["sulfide (vrij)", "Mangaan (II)", "Ijzer (2+)"]
 #plot_compounds = ["naftaleen", "acenaftyleen", "acenafteen", "fluoreen", "fenantreen", "antraceen"]
 # Rename the contaminants to be plotted (optional), put them in the same order as above.
-#rename_compounds = ["benzene", "toluene", "ethylbenzene", "xylenes", "total BTEX"]
+rename_compounds = ["benzene", "toluene", "ethylbenzene", "xylenes", "total BTEX"]
 #rename_compounds = ["sulfide (free)", "manganese (II)", "iron (II)"]
 #rename_compounds = ["oxygen"]
-rename_compounds = ["Oxygen", "Nitrate", "Solphate"]
+#rename_compounds = ["Oxygen", "Nitrate", "Solphate"]
 #rename_compounds = ["Naphtalene", "Acenaphthylene", "Acenaphtene", "Fluorene", "Fenantrene", "Anthracene"]
 # Locations to plot, using the names of location_dictionary.
 colors = ["#5c0000", "#89003d", "#f0ab70", "#ffd220", "#66a697", "#004D8A"]
-plots = ["CW1_deep", "CW2_deep", "CW3_deep"]
+plots = ["CW1_shallow", "CW2_shallow", "CW3_shallow"]
 subplots = ["a", "b", "c"]
 
 for i, location in enumerate(plots):
     plot_location = loc[location]
     ax = tools.plot_compound(df, plot_location, plot_compounds, 
                              rename = rename_compounds,
-                             normalize = True, 
+                             normalize = False, 
                              compensate_dilution = True,
                              plot_type="line",
                              ylimit = False,

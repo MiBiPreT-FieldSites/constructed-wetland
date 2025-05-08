@@ -233,55 +233,55 @@ def plot_compound(dataframe, locations, compounds, rename = None, normalize = Fa
     plot_frame = dataframe.drop(columns = "unit", axis=0)
     
     # Influent is the same for each wetland, thus divide by it to normalize data.
-    # if normalize:
-    #     plot_frame = plot_frame.div(plot_frame["INF"], axis = 0)
-    
-    # if compensate_dilution:
-    #     if not normalize:
-    #         comp_chlor = plot_frame.div(plot_frame["INF"], axis = 0)
-    #         plot_frame = plot_frame.div(comp_chlor.loc["chloride"])
-    #     else:
-    #         plot_frame = plot_frame.div(plot_frame.loc["chloride"])
-    
-    #if not normalize:
-        #plot_frame = plot_frame.div(1000)
-
     if normalize:
-        norm_frame = plot_frame.copy()
-
-        for cmpd in plot_frame.index:
-            if cmpd != "Zuurstof":
-                try:
-                    # Get the scalar INF value for this compound
-                    inf_value = plot_frame.at[cmpd, "INF"]
-                                
-                    # Normalize the full row
-                    norm_frame.loc[cmpd] = plot_frame.loc[cmpd] / inf_value
-
-                except Exception as e:
-                    print(f"Skipping {cmpd} due to error: {e}")
-
-        plot_frame = norm_frame
-
-
-    # --- STEP 2: If chloride correction is requested ---
+        plot_frame = plot_frame.div(plot_frame["INF"], axis = 0)
+    
     if compensate_dilution:
-                
-        # If normalize is False, we still need to normalize (except Zuurstof) to apply chloride correction
         if not normalize:
-            for cmpd in plot_frame.index:
-                if cmpd != "Zuurstof":
-                    try:
-                        # Get the scalar INF value for this compound
-                        inf_value = plot_frame.at[cmpd, "INF"]
+            comp_chlor = plot_frame.div(plot_frame["INF"], axis = 0)
+            plot_frame = plot_frame.div(comp_chlor.loc["chloride"])
+        else:
+            plot_frame = plot_frame.div(plot_frame.loc["chloride"])
+    
+    if not normalize:
+        plot_frame = plot_frame.div(1000)
+
+    # if normalize:
+    #     norm_frame = plot_frame.copy()
+
+    #     for cmpd in plot_frame.index:
+    #         if cmpd != "Zuurstof":
+    #             try:
+    #                 # Get the scalar INF value for this compound
+    #                 inf_value = plot_frame.at[cmpd, "INF"]
+                                
+    #                 # Normalize the full row
+    #                 norm_frame.loc[cmpd] = plot_frame.loc[cmpd] / inf_value
+
+    #             except Exception as e:
+    #                 print(f"Skipping {cmpd} due to error: {e}")
+
+    #     plot_frame = norm_frame
+
+
+    # # --- STEP 2: If chloride correction is requested ---
+    # if compensate_dilution:
+                
+    #     # If normalize is False, we still need to normalize (except Zuurstof) to apply chloride correction
+    #     if not normalize:
+    #         for cmpd in plot_frame.index:
+    #             if cmpd != "Zuurstof":
+    #                 try:
+    #                     # Get the scalar INF value for this compound
+    #                     inf_value = plot_frame.at[cmpd, "INF"]
                                     
-                        # Normalize the full row
-                        norm_frame.loc[cmpd] = plot_frame.loc[cmpd] / inf_value
+    #                     # Normalize the full row
+    #                     norm_frame.loc[cmpd] = plot_frame.loc[cmpd] / inf_value
 
-                    except Exception as e:
-                        print(f"Skipping {cmpd} due to error: {e}")
+    #                 except Exception as e:
+    #                     print(f"Skipping {cmpd} due to error: {e}")
 
-            plot_frame = norm_frame
+    #         plot_frame = norm_frame
 
     #Now apply chloride-based dilution correction to all compounds
     chloride_correction = plot_frame.loc["chloride"]
