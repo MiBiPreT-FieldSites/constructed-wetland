@@ -24,14 +24,14 @@ btc_df = main()
 # )
 
 # === Example 2: Plot multiple compounds at one well ===
-# plot_multiple_compounds_at_well(
-#     df=btc_df,
-#     compounds=["benzene", "naphthalene"],
-#     well="CW1_EFF",
-#     y="C_rel",
-#     x="tau",
-#     save=False
-# )
+plot_multiple_compounds_at_well(
+    df=btc_df,
+    compounds=["benzene", "naphthalene"],
+    well="CW3_EFF",
+    y="C_rel",
+    x="tau",
+    save=True
+)
 
 # === Example 3: Save BTC plots for all compounds and wells ===
 # plot_all_compounds_all_wells(
@@ -44,7 +44,7 @@ btc_df = main()
 # === Example 4: Side-by-side plot for one compound across 3 wetlands ===
 # plot_wetlands_side_by_side(
 #     df=btc_df,
-#     compound="benzene",
+#     compound="toluene",
 #     y="C_rel",
 #     x="tau",
 #     save=True,
@@ -52,14 +52,14 @@ btc_df = main()
 # )
 
 # === Example 5: ADE vs Measured side-by-side for all wells ===
-plot_ade_solution_side_by_side(
-    df=btc_df,
-    y="C_rel",
-    x="days",
-    ade_column="ADE_adsorption_only",
-    save=True,
-    output_dir="plots/ade_comparison"
-)
+# plot_ade_solution_side_by_side(
+#     df=btc_df,
+#     y="C_rel",
+#     x="days",
+#     ade_column="ADE_adsorption_only",
+#     save=True,
+#     output_dir="plots/ade_comparison"
+# )
 
 # === Example 6: Measured vs ADE for one compound at one well ===
 # plot_measured_vs_ade(
