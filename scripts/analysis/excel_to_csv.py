@@ -7,7 +7,7 @@ import pandas as pd
 
 #Load the Excel file
 # Relative file path to the excel file with the data
-time_point = "3"
+time_point = "4"
 excel_file = f"../../data/preprocessed/na_screening/cw_T{time_point}_preprocessed.xlsx"
 df = pd.read_excel(excel_file)
 

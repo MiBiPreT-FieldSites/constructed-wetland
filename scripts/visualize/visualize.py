@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Load the result file 
-time_point = "3"
+time_point = "4"
 na_result = pd.read_excel(f"../../results/na_screening_result_T{time_point}.xlsx")  
 
 # Define sampling locations per wetland and depth 

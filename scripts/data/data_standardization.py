@@ -178,8 +178,8 @@ def cleanup_compound(file_path):
 
 if __name__ == "__main__":
      # Relative file path to the excel file with the data
-    time_point = "3"
-    file_path = f"../../data/raw/CW_field_meassurements/Raw_data_lab/240120_Resultaten_ronde_T{time_point}.xlsx"
+    time_point = "4"
+    file_path = f"../../data/raw/CW_field_meassurements/Raw_data_lab/14280168_Resultaten_ronde_T{time_point}.xlsx"
     
       #Call the cleanup_compound function to clean up the data
     cleaned_data = cleanup_compound(file_path)

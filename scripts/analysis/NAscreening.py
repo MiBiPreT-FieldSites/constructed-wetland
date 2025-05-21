@@ -4,7 +4,7 @@ from mibiscreen.data.check_data import standardize
 from mibiscreen.data.load_data import load_csv
 from IPython.display import display
 
-time_point = "3"
+time_point = "4"
 file_path = f"../../data/preprocessed/na_screening/cw_T{time_point}_preprocessed.csv"
 
 data_raw,units = load_csv(file_path, verbose = True)

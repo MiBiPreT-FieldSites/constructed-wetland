@@ -89,7 +89,7 @@ def extract_contaminants(file_path, contaminants_of_interest, time_point, conver
 
 
 if __name__ == "__main__":
-    time_point = "3"
+    time_point = "4"
     file_path = f"../../data/cleaned/cw_T{time_point}_cleaned.xlsx"
     
     # Contaminants list
