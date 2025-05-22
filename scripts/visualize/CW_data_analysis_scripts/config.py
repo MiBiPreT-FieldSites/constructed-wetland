@@ -9,11 +9,11 @@ FILE_PATHS = [
 ]
 
 # Site parameters
-BULK_DENSITY = 1.43   # kg/L (estimated from media layers)
-POROSITY     = 0.4   # dimensionless
-FLOW_RATE    = 1   # m³/day
+BULK_DENSITY = 1.7   # kg/L (estimated from media layers)
+POROSITY     = 0.3   # dimensionless
+FLOW_RATE    = 0.5   # m³/day
 BULK_VOLUME  = 4.0    # m³
-FOC          = 0.004   # fraction of organic carbon (e.g., 0.4%)
+FOC          = 0.02   # fraction of organic carbon (e.g., 0.4%)
 PORE_VOLUME  = 20 # m³
 
 # Compound definitions: log_Kow, decay_rate (1/day), molecular_weight (g/mol)

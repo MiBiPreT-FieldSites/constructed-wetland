@@ -50,9 +50,9 @@ def main():
 
     # Initialize with site-specific transport parameters
     ade = ADESolution(
-        dispersion_length=1,      # α in meters
+        dispersion_length=0.1,      # α in meters
         velocity=0.58,               # v in m/day
-        transport_distance=12      # L in meters
+        transport_distance=20      # L in meters
     )
 
     # Add the erfc-based analytical solution to the BTC DataFrame

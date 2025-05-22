@@ -24,14 +24,14 @@ btc_df = main()
 # )
 
 # === Example 2: Plot multiple compounds at one well ===
-plot_multiple_compounds_at_well(
-    df=btc_df,
-    compounds=["benzene", "naphthalene"],
-    well="CW3_EFF",
-    y="C_rel",
-    x="tau",
-    save=True
-)
+# plot_multiple_compounds_at_well(
+#     df=btc_df,
+#     compounds=["benzene", "naphthalene"],
+#     well="CW3_EFF",
+#     y="C_rel",
+#     x="tau",
+#     save=False
+# )
 
 # === Example 3: Save BTC plots for all compounds and wells ===
 # plot_all_compounds_all_wells(
@@ -62,13 +62,13 @@ plot_multiple_compounds_at_well(
 # )
 
 # === Example 6: Measured vs ADE for one compound at one well ===
-# plot_measured_vs_ade(
-#     df=btc_df,
-#     compound="benzene",
-#     well="CW1_EFF",
-#     y="C_rel",
-#     x="tau",
-#     ade_column="ADE_adsorption_only",
-#     save=False  # Change to True to save
-# )
+plot_measured_vs_ade(
+    df=btc_df,
+    compound="naphthalene",
+    well="CW1_EFF",
+    y="C_rel",
+    x="tau",
+    ade_column="ADE_adsorption_only",
+    save=False  # Change to True to save
+)
 
