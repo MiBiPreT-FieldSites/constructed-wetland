@@ -17,7 +17,8 @@
 
 ## Overview
 
-The `extract_contaminants` function takes a cleaned, standardized Excel file and produces a tailored DataFrame for NA-screening by selecting only relevant contaminant columns, inserting a unique coding column, and optionally converting measurement values to integers.
+The `extract_contaminants` function takes a cleaned, standardized Excel file and produces a tailored `DataFrame` for NA-screening by selecting only relevant contaminant columns, inserting a unique coding column, and optionally converting measurement values to integers.
+
 
 ## Prerequisites
 
