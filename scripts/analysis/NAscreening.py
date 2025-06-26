@@ -1,25 +1,22 @@
-
-import mibipret.analysis.sample.screening_NA as na
-from mibipret.data.check_data import standardize
-from mibipret.data.load_data import load_csv
+import mibiscreen as mbs
 from IPython.display import display
 
-file_path = "../../data/cleaned/cw_T3_BTEXN.csv"
-data_raw,units = load_csv(file_path, verbose = True)
+file_path = "../../data/preprocessed/na_screening/cw_T4_preprocessed.csv"
+data_raw,units = mbs.load_csv(file_path, verbose = True)
 
-data,units = standardize(data_raw,reduce = True, verbose = True)
+data,units = mbs.standardize(data_raw,reduce = True, verbose = True)
 
-tot_redct = na.reductors(data, verbose = True, ea_group = "ONS")
+tot_redct = mbs.reductors(data, verbose = True, ea_group = "ONS")
 
-tot_oxi = na.oxidators(data, verbose = True, contaminant_group="BTEX")
+tot_oxi = mbs.oxidators(data, verbose = True, contaminant_group="BTEX")
 
-e_bal = na.electron_balance(data, verbose=True)
+e_bal = mbs.electron_balance(data, verbose=True)
 
-na_traffic = na.NA_traffic(data,verbose = True)
+na_traffic = mbs.sample_NA_traffic(data,verbose = True)
 
-tot_cont = na.total_contaminant_concentration(data, verbose = True, contaminant_group="BTEX")
+tot_cont = mbs.total_contaminant_concentration(data, verbose = True, contaminant_group="BTEX")
 
-na_interventation = na.thresholds_for_intervention(data, verbose=True, contaminant_group="BTEX")
+na_interventation = mbs.thresholds_for_intervention(data, verbose=True, contaminant_group="BTEX")
 
-data_na = na.screening_NA(data)
+data_na = mbs.sample_NA_screening(data)
 display(data_na)

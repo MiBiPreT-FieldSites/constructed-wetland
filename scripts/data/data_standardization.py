@@ -159,7 +159,7 @@ def cleanup_compound(file_path):
     excluded_cols = ["Well name", "unit"]
 
     # Create a boolean mask based on the 'Header' column.
-    # This mask is True for rows where the Header is NOT "Zuurstof" or "Monsteromschrijving"
+    # This mask is True for rows where the Header is NOT "Oxygen" or "Sample description"
     mask = ~dataframe_reset_sorted["Well name"].isin(["Oxygen", "Sample description"])
 
     for col in dataframe_reset_sorted.columns:
@@ -169,7 +169,7 @@ def cleanup_compound(file_path):
             dataframe_reset_sorted.loc[mask, col] = pd.to_numeric(dataframe_reset_sorted.loc[mask, col], errors='coerce')
     dataframe_reset_sorted = dataframe_reset_sorted.fillna(0.0)
     
-    # After cleaning, update the "unit" column for the row where "Well name" is "Monsteromschrijving"
+    # After cleaning, update the "unit" column for the row where "Well name" is "Sample description"
     dataframe_reset_sorted.loc[dataframe_reset_sorted["Well name"] == "Sample description", "unit"] = "-"
     
     dataframe_transposed = dataframe_reset_sorted.transpose()
@@ -178,8 +178,8 @@ def cleanup_compound(file_path):
 
 if __name__ == "__main__":
      # Relative file path to the excel file with the data
-    time_point = "3"
-    file_path = f"../../data/raw/CW_field_meassurements/Raw_data_lab/240120_Resultaten_ronde_T{time_point}.xlsx"
+    time_point = "4"
+    file_path = f"../../data/raw/CW_field_meassurements/Raw_data_lab/14280168_Resultaten_ronde_T{time_point}.xlsx"
     
       #Call the cleanup_compound function to clean up the data
     cleaned_data = cleanup_compound(file_path)
